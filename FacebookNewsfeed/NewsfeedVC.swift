@@ -14,7 +14,7 @@ class NewsfeedVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        collectionView.backgroundColor = #colorLiteral(red: 0.8640883565, green: 0.9178858399, blue: 0.9996795058, alpha: 1)
         title = "Newsfeed"
         
         // register the cell
