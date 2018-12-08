@@ -15,8 +15,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        setupUI(application: application)
         return true
+        
+        
+    }
+    
+    func setupUI(application: UIApplication) {
+        
+        // get the window of the app
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        // Initializes a collection view controller and configures the collection view with the provided layout. (7:30)
+        let newsfeedVC = NewsfeedVC(collectionViewLayout: UICollectionViewFlowLayout())
+        // create navigation controller to be root VC of the window
+        let navigationController = UINavigationController(rootViewController: newsfeedVC)
+        window?.rootViewController = navigationController
+        
+        // some navigationBar changes
+        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.3130478561, green: 0.4422736466, blue: 0.6388198137, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        application.statusBarStyle = .lightContent
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
