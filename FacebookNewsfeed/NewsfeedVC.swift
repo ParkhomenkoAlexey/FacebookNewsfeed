@@ -11,6 +11,7 @@ import UIKit
 
 class NewsfeedVC: UICollectionViewController {
 
+    var posts : [Post] = Post.fetchPosts()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class NewsfeedVC: UICollectionViewController {
         
         // register the cell
         collectionView.register(NewsfeedCollectionViewCell.self, forCellWithReuseIdentifier: Identifier.newsfeedCell)
+        
 
     }
     
@@ -29,13 +31,17 @@ class NewsfeedVC: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.newsfeedCell, for: indexPath) as! NewsfeedCollectionViewCell
+        cell.post = self.posts[indexPath.item]
         return cell
     }
+    
+    
     
 }
 
