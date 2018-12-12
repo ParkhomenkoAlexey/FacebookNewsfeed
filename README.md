@@ -1,5 +1,6 @@
 # FacebookNewsfeed
 
+Facebook Newsfeed from scratch all programmatically without using the Storyboard. Go over exactly how to layout every cell's subview by using VisualFormatLanguage. Extensions will be used to make adding constraints much easier. By the time you complete the project, you'll have the perfect understanding of how to construct your views for the perfect layout.
 
 ## What I have done
  
@@ -9,10 +10,20 @@
 - [Setup application in code](#Setup-application-in-code)
 - [Customizing the appearance of a Navigation Bar](#Customizing-the-appearance-of-a-Navigation-Bar)
 - [Working with UICollectionViewCell](#Create-and-initialize-UICollectionViewCell-in-code)
-    - **[Create and initialize UICollectionViewCell in code](#Create-and-initialize-UICollectionViewCell-in-code)** 
-    - **[Make size of UICollectionViewCell in code](#Make-size-of-UICollectionViewCell-in-code)** 
-    - **[Add elements to the cell and fix them using VisualFormat](#Add-elements-to-the-cell-and-fix-them-using-VisualFormat)** 
+    - [Create and initialize UICollectionViewCell in code](#Create-and-initialize-UICollectionViewCell-in-code) 
+    - [Make const size of UICollectionViewCell in code](#Make-const-size-of-UICollectionViewCell-in-code) 
+    - [Add elements to the cell and fix them using VisualFormat](#Add-elements-to-the-cell-and-fix-them-using-VisualFormat)
+    - **[Dymanic change UICollectionViewCell size](#Dymanic-change-UICollectionViewCell-size)** 
+        - [How to Resize Textview Dynamically](#Dymanic-change-UICollectionViewCell-size)
+        - [Sizing UITableView Cells to Fit Images](#Dymanic-change-UICollectionViewCell-size)
+
     
+ ## How this application will be improved
+ 
+- Add TabBarController to include another functions such as "friend requests"
+- Get real data(posts) by using API.
+- Make posts only with a post image or with post text only.
+- Restrict text size with the "show full" button if it exceeds the size of three lines of the screen.    
 
 ## Setup application in code
 
@@ -106,7 +117,7 @@ override init(frame: CGRect) {
   
   ![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed2.png)
   
-## Make size of UICollectionViewCell in code
+## Make const size of UICollectionViewCell in code
 
 ![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed3.png)
 
@@ -120,9 +131,9 @@ extension NewsfeedVC: UICollectionViewDelegateFlowLayout {
     }
 }
 ```
+And make sure that your `UICollectionViewController` initialize with `UICollectionViewFlowLayout()`
 
-And make sure that in AppDelegate your UICollectionViewController initialize with UICollectionViewFlowLayout()
-
+Because in my app UICollectionViewController is a rootViewController this is described as follows:
 #### AppDelegate file
 ```swift
 let newsfeedVC = NewsfeedVC(collectionViewLayout: UICollectionViewFlowLayout())
@@ -206,3 +217,113 @@ extension UIView {
 Result:
 
 ![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed4.png)
+
+## Dymanic change UICollectionViewCell size
+
+Constraints of our cell are arranged vertically as follows:
+#### NewsfeedCollectionViewCell file
+
+```swift
+// constraints vertical
+addConstraints(withVisualFormat: "V:|-8-[v0(44)]-4-[v1][v2]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, captionTextView, postImageView, postStatLabel, postDividerView, likeButton)
+```
+Note that some elements have constant values. `[v1][v2]` - captionTextView and postImageView. They both must be present in every post. If something is missing one of these two, the application will break.
+
+Resize height of each cell based on content size
+#### NewsfeedVC file 
+```swift
+// Don't forget to add:
+class NewsfeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
+```
+
+```swift
+func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let captionText = posts[indexPath.row].caption
+        let postImage = posts[indexPath.row].image
+        let knownHeight: CGFloat = 8 + 44 + 4 + 8 + 24 + 8 + 0.4 + 44
+        
+        let textHeight = getCaptionTextHeight(text: captionText!)
+        let imageHeight = getPostImageHeight(image: postImage!)
+        return CGSize(width: view.frame.width, height: textHeight + knownHeight + imageHeight + 18)
+        
+    }
+```
+Please note that we know the size of some elements in advance that we can see in `knownHeight`.
+
+#### NewsfeedVC file
+```swift
+func getCaptionTextHeight(text: String) -> CGFloat {
+        let rect = NSString(string: text).boundingRect(with: CGSize(width: view.frame.width, height: 2000),
+                                                       options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin),
+                                                       attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)],
+                                                       context: nil)
+        return rect.height
+    }
+    
+    // dymanic change postImageView size
+    func getPostImageHeight(image: UIImage) -> CGFloat {
+        let imageCrop = image.getCropRatio()
+        let postImageHeigh = view.frame.width / imageCrop
+        return postImageHeigh
+    }
+```
+
+### 1. Caption text height
+Font size is set to 14 because in UICollectionViewCell file size of the text is the same. Proof below.
+
+#### NewsfeedCollectionViewCell file
+```swift
+private lazy var captionTextView: UITextView! = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 14)
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.isSelectable = false
+        return textView
+    }()
+```
+### Post image height
+What about the image, we calculate its ratio and derive its height based on the width. Images are real size.
+
+`image.getCropRatio()` my own creation and you can find it in:
+
+#### Extensions file 
+```swift
+extension UIImage {
+    func getCropRatio() -> CGFloat {
+        let widthRatio = CGFloat(self.size.width / self.size.height)
+        return widthRatio
+    }
+}
+```
+P.S. Due to the fact that we dynamically change not only the size of the image, but also the size of the text, there is a small error in calculations, and in cases where a lot of post text is an image for some reason less than it should be. 
+
+What I am talking about: 
+
+![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed6.png)
+
+I corrected this situation using `contentMode = .scaleAspectFill` instead of `contentMode = .scaleAspectFit`.
+#### NewsfeedCollectionViewCell file
+```swift
+private lazy var postImageView: UIImageView! = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true // image do not go outside its bounds
+        return imageView
+    }()
+```
+
+## Author
+| [<img src="https://avatars1.githubusercontent.com/u/8983647?s=460&amp;v=4" width="120px;"/>](https://github.com/ParkhomenkoAlexey)   | [Parkhomenko Alexey](https://github.com/ParkhomenkoAlexey)<br/><br/><sub>iOS Software Engineer</sub><br/> [![Facebook][1.1]][1] [![Github][2.1]][2] [![VKontakte][3.1]][3]|
+| - | :- |
+
+[1.1]: https://www.kingsfund.org.uk/themes/custom/kingsfund/dist/img/svg/sprite-icon-facebook.svg (facebook icon)
+[2.1]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
+[3.1]: https://github.com/ParkhomenkoAlexey/Images/blob/master/Orion_vk.svg (vk icon)
+
+
+[1]: https://www.facebook.com/profile.php?id=100030997816322
+[2]: https://github.com/ParkhomenkoAlexey
+[3]: https://vk.com/id189198242
