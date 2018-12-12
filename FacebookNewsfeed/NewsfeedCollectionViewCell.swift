@@ -6,6 +6,7 @@
 //  Copyright © 2018 Алексей Пархоменко. All rights reserved.
 //
 
+
 import UIKit
 
 struct Identifier {
@@ -69,7 +70,6 @@ class NewsfeedCollectionViewCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView! = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = #colorLiteral(red: 0.5686792731, green: 0.7940976024, blue: 0.9984217286, alpha: 1)
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "1")
         return imageView
@@ -77,30 +77,26 @@ class NewsfeedCollectionViewCell: UICollectionViewCell {
     
     private lazy var usernameLabel: UILabel! = {
         let label = UILabel()
-        label.numberOfLines = 3
+        //label.numberOfLines = 1
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.text = "Alexey Parkhomenko"
-        label.backgroundColor = UIColor.orange
         return label
     }()
     
     private lazy var captionTextView: UITextView! = {
         let textView = UITextView()
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.font = UIFont.systemFont(ofSize: 14)
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.isSelectable = false
-        textView.backgroundColor = #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1)
-        textView.text = "Alexey Parkhomenko Alexey Parkhomenko Alexey Parkhomenko Alexey Parkhomenko Alexey Parkhomenko Alexey Parkhomenko Alexey Parkhomenko"
         return textView
     }()
     
     private lazy var postImageView: UIImageView! = {
         let imageView = UIImageView()
-        //imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true // image do not go outside its bounds
-        imageView.image = UIImage(named: "1")
-        
         return imageView
     }()
     
@@ -170,8 +166,7 @@ class NewsfeedCollectionViewCell: UICollectionViewCell {
         
         // profileImageView and usernameLabel constraints
         addConstraints(withVisualFormat: "H:|-8-[v0(44)]-8-[v1]-8-|", views: profileImageView, usernameLabel)
-        addConstraints(withVisualFormat: "V:|-12-[v0]", views: usernameLabel)
-        //addConstraints(withVisualFormat: "V:|-12-[v0(44)]", views: profileImageView)
+        addConstraints(withVisualFormat: "V:|-8-[v0]", views: usernameLabel)
         
         //constraints for timeAgoLabel + privacyImageView
         addConstraints(withVisualFormat: "H:[v0]-8-[v1]-4-[v2(10)]", views: profileImageView, timeAgoLabel, privacyImageView)
@@ -179,8 +174,7 @@ class NewsfeedCollectionViewCell: UICollectionViewCell {
         addConstraints(withVisualFormat: "V:[v0]-6-[v1(10)]", views: usernameLabel, privacyImageView)
         
         // constraints for the captionTextView
-        addConstraints(withVisualFormat: "H:|-8-[v0]-8-|", views: captionTextView)
-        //addConstraints(withVisualFormat: "V:[v0]-6-[v1(50)]", views: profileImageView, captionTextView)
+        addConstraints(withVisualFormat: "H:|[v0]|", views: captionTextView)
         
         // constraints for the postImageView
         addConstraints(withVisualFormat: "H:|[v0]|", views: postImageView)
@@ -195,11 +189,10 @@ class NewsfeedCollectionViewCell: UICollectionViewCell {
         addConstraints(withVisualFormat: "H:|[v0(v2)][v1(v2)][v2]|", views: likeButton, commentButton, shareButton)
         addConstraints(withVisualFormat: "V:[v0(44)]|", views: commentButton)
         addConstraints(withVisualFormat: "V:[v0(44)]|", views: shareButton)
-        addConstraints(withVisualFormat: "V:[v0(44)]|", views: likeButton)
         
         // constraints vertical
         
-        addConstraints(withVisualFormat: "V:|-12-[v0(44)]-8-[v1(50)]-8-[v2]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, captionTextView, postImageView, postStatLabel, postDividerView, likeButton)
+        addConstraints(withVisualFormat: "V:|-8-[v0(44)]-4-[v1][v2]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, captionTextView, postImageView, postStatLabel, postDividerView, likeButton)
 
     }
 }

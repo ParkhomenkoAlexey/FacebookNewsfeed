@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F01D355121C175600048DBBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F01D355021C175600048DBBA /* Assets.xcassets */; };
 		F066A30421BC4EAC0095535F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066A30321BC4EAC0095535F /* Post.swift */; };
-		F0683F5021BDB09400A8C210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0683F4F21BDB09400A8C210 /* Assets.xcassets */; };
 		F073400921B950A300CF7B1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F073400821B950A300CF7B1F /* AppDelegate.swift */; };
-		F073400B21B950A300CF7B1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F073400A21B950A300CF7B1F /* ViewController.swift */; };
 		F073401321B950A400CF7B1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F073401121B950A400CF7B1F /* LaunchScreen.storyboard */; };
 		F0D3632E21BB081900602950 /* NewsfeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3632D21BB081900602950 /* NewsfeedVC.swift */; };
 		F0D3633021BB120F00602950 /* NewsfeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3632F21BB120F00602950 /* NewsfeedCollectionViewCell.swift */; };
@@ -18,11 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F01D355021C175600048DBBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F066A30321BC4EAC0095535F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		F0683F4F21BDB09400A8C210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F073400521B950A300CF7B1F /* FacebookNewsfeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookNewsfeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F073400821B950A300CF7B1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F073400A21B950A300CF7B1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F073401221B950A400CF7B1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F073401421B950A400CF7B1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0D3632D21BB081900602950 /* NewsfeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedVC.swift; sourceTree = "<group>"; };
@@ -65,9 +63,8 @@
 				F066A30321BC4EAC0095535F /* Post.swift */,
 				F0D3633121BB13CC00602950 /* Extentions.swift */,
 				F0D3632F21BB120F00602950 /* NewsfeedCollectionViewCell.swift */,
-				F073400A21B950A300CF7B1F /* ViewController.swift */,
 				F073401121B950A400CF7B1F /* LaunchScreen.storyboard */,
-				F0683F4F21BDB09400A8C210 /* Assets.xcassets */,
+				F01D355021C175600048DBBA /* Assets.xcassets */,
 				F073401421B950A400CF7B1F /* Info.plist */,
 			);
 			path = FacebookNewsfeed;
@@ -131,7 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0683F5021BDB09400A8C210 /* Assets.xcassets in Resources */,
+				F01D355121C175600048DBBA /* Assets.xcassets in Resources */,
 				F073401321B950A400CF7B1F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0D3632E21BB081900602950 /* NewsfeedVC.swift in Sources */,
-				F073400B21B950A300CF7B1F /* ViewController.swift in Sources */,
 				F0D3633221BB13CC00602950 /* Extentions.swift in Sources */,
 				F066A30421BC4EAC0095535F /* Post.swift in Sources */,
 				F0D3633021BB120F00602950 /* NewsfeedCollectionViewCell.swift in Sources */,

@@ -9,12 +9,6 @@
 import Foundation
 import UIKit
 
-extension NewsfeedVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 600)
-    }
-}
-
 extension UIView {
     
     // set the size for elements in UICollectionViewCell
@@ -37,4 +31,9 @@ extension UIView {
     
 }
 
-
+extension UIImage {
+    func getCropRatio() -> CGFloat {
+        let widthRatio = CGFloat(self.size.width / self.size.height)
+        return widthRatio
+    }
+}
