@@ -2,15 +2,17 @@
 
 
 ## What I have done
-/// 
-
+ 
+![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed5.gif)
 ## What you will learn
-
+    
 - [Setup application in code](#Setup-application-in-code)
 - [Customizing the appearance of a Navigation Bar](#Customizing-the-appearance-of-a-Navigation-Bar)
-- [Create and initialize UICollectionViewCell in code](#Create-and-initialize-UICollectionViewCell-in-code)
-- [Make size of UICollectionViewCell in code](#Make-size-of-UICollectionViewCell-in-code)
-- [Add elements to the cell and fix them using VisualFormat](#Add-elements-to-the-cell-and-fix-them-using-VisualFormat)
+- [Working with UICollectionViewCell](#Create-and-initialize-UICollectionViewCell-in-code)
+    - **[Create and initialize UICollectionViewCell in code](#Create-and-initialize-UICollectionViewCell-in-code)** 
+    - **[Make size of UICollectionViewCell in code](#Make-size-of-UICollectionViewCell-in-code)** 
+    - **[Add elements to the cell and fix them using VisualFormat](#Add-elements-to-the-cell-and-fix-them-using-VisualFormat)** 
+    
 
 ## Setup application in code
 
