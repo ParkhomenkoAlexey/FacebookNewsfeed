@@ -218,6 +218,28 @@ Result:
 
 ![FacebookNewsfeed](https://github.com/ParkhomenkoAlexey/Images/blob/master/FacebookNewsfeed4.png)
 
+### LIFEHACK
+
+If you have to initilize the same elements you may use:
+
+#### NewsfeedCollectionViewCell file
+```swift
+    private lazy var likeButton: UIButton! = NewsfeedCollectionViewCell.buttonWithTitle("Like", imageName: "icon-like")
+    private lazy var commentButton: UIButton! = NewsfeedCollectionViewCell.buttonWithTitle("Comment", imageName: "icon-comment")
+    private lazy var shareButton: UIButton! = NewsfeedCollectionViewCell.buttonWithTitle("Share", imageName: "icon-share")
+    
+    // class keyword here means that this function belongs to the class we can call without initializing an instance
+    private class func buttonWithTitle(_ title: String, imageName: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor(red: 143/255, green: 150/255, blue: 163/255, alpha: 1), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setImage(UIImage(named: imageName), for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        return button
+    }
+```
+
 ## Dymanic change UICollectionViewCell size
 
 Constraints of our cell are arranged vertically as follows:
